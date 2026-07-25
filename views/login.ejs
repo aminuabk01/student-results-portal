@@ -6,7 +6,10 @@
 </head>
 <body>
   <div class="login-box card">
-    <h1>Login</h1>
+    <h1>Student Results Portal</h1>
+    <p style="color:#6b7280; font-size:14px; margin-top:-8px;">
+      A platform for students to securely view and download their academic results, and for admins to manage student records.
+    </p>
     <% if (error) { %><p class="error"><%= error %></p><% } %>
     <form method="POST" action="/login">
       <input type="text" name="regNumber" placeholder="Registration Number" required>
