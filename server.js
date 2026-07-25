@@ -34,7 +34,6 @@ app.use(session({
 
 // Routes
 app.get('/', (req, res) => res.redirect('/login'));
-app.use('/', require('./routes/setup'));
 app.use('/', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/student', studentRoutes);
