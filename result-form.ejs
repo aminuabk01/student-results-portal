@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= result ? 'Edit' : 'Add' %> Result</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <span>Admin Panel</span>
+    <div><a href="/admin/dashboard">Dashboard</a><a href="/logout">Logout</a></div>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h1><%= result ? 'Edit' : 'Add' %> Result for <%= student.name %></h1>
+      <form method="POST" action="<%= result ? '/admin/results/' + result._id + '?_method=PUT' : '/admin/results/' + student._id %>">
+        <input type="text" name="session" placeholder="Session (e.g. 2025/2026)" value="<%= result ? result.session : '' %>" required>
+        <input type="text" name="term" placeholder="Term (e.g. First Semester)" value="<%= result ? result.term : '' %>" required>
+        <input type="text" name="courseCode" placeholder="Course Code (e.g. CSC432)" value="<%= result ? result.courseCode : '' %>" required>
+        <input type="text" name="courseTitle" placeholder="Course Title" value="<%= result ? result.courseTitle : '' %>" required>
+        <input type="number" name="score" placeholder="Score (0-100)" min="0" max="100" value="<%= result ? result.score : '' %>" required>
+        <button type="submit"><%= result ? 'Update' : 'Add' %> Result</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

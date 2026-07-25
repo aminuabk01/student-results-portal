@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Students</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <span>Admin Panel</span>
+    <div><a href="/admin/dashboard">Dashboard</a><a href="/logout">Logout</a></div>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h1>Students</h1>
+      <a class="btn" href="/admin/students/new">+ Add Student</a>
+      <table>
+        <tr><th>Name</th><th>Reg Number</th><th>Level</th><th>Actions</th></tr>
+        <% students.forEach(s => { %>
+        <tr>
+          <td><%= s.name %></td>
+          <td><%= s.regNumber %></td>
+          <td><%= s.level || '-' %></td>
+          <td>
+            <a class="btn btn-sm" href="/admin/students/<%= s._id %>/results">Results</a>
+            <a class="btn btn-sm" href="/admin/students/<%= s._id %>/edit">Edit</a>
+            <form style="display:inline" method="POST" action="/admin/students/<%= s._id %>?_method=DELETE" onsubmit="return confirm('Delete this student and all their results?')">
+              <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

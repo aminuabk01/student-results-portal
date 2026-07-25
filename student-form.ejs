@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= student ? 'Edit' : 'Add' %> Student</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <span>Admin Panel</span>
+    <div><a href="/admin/dashboard">Dashboard</a><a href="/logout">Logout</a></div>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h1><%= student ? 'Edit' : 'Add' %> Student</h1>
+      <% if (error) { %><p class="error"><%= error %></p><% } %>
+      <form method="POST" action="<%= student ? '/admin/students/' + student._id + '?_method=PUT' : '/admin/students' %>">
+        <input type="text" name="name" placeholder="Full Name" value="<%= student ? student.name : '' %>" required>
+        <% if (!student) { %>
+          <input type="text" name="regNumber" placeholder="Registration Number" required>
+          <input type="password" name="password" placeholder="Password" required>
+        <% } %>
+        <input type="email" name="email" placeholder="Email" value="<%= student ? student.email : '' %>">
+        <input type="text" name="department" placeholder="Department" value="<%= student ? student.department : '' %>">
+        <input type="text" name="level" placeholder="Level (e.g. 300L)" value="<%= student ? student.level : '' %>">
+        <button type="submit"><%= student ? 'Update' : 'Create' %></button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

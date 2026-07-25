@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Results</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <span>Student Portal</span>
+    <div><a href="/logout">Logout</a></div>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h1>Welcome, <%= student.name %></h1>
+      <p><%= student.regNumber %> | <%= student.department || '-' %> | <%= student.level || '-' %></p>
+      <a class="btn" href="/student/results/pdf">Download Results (PDF)</a>
+    </div>
+    <div class="card">
+      <h2>My Results</h2>
+      <table>
+        <tr><th>Session</th><th>Term</th><th>Course</th><th>Score</th><th>Grade</th></tr>
+        <% results.forEach(r => { %>
+        <tr>
+          <td><%= r.session %></td>
+          <td><%= r.term %></td>
+          <td><%= r.courseCode %> - <%= r.courseTitle %></td>
+          <td><%= r.score %></td>
+          <td><%= r.grade %></td>
+        </tr>
+        <% }) %>
+        <% if (results.length === 0) { %>
+        <tr><td colspan="5">No results published yet.</td></tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
