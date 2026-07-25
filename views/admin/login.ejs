@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login - Student Results Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="login-box card">
+    <h1>Admin Login</h1>
+    <% if (error) { %><p class="error"><%= error %></p><% } %>
+    <form method="POST" action="/admin/login">
+      <input type="text" name="regNumber" placeholder="Admin Reg Number" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p style="text-align:center; margin-top:12px;"><a href="/">Back</a></p>
+  </div>
+</body>
+</html>
