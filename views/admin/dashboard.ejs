@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <span>Admin Panel</span>
+    <div><span><%= name %></span> <a href="/logout">Logout</a></div>
+  </nav>
+  <div class="container">
+    <div class="card stats">
+      <div class="stat"><div class="num"><%= studentCount %></div>Students</div>
+      <div class="stat"><div class="num"><%= resultCount %></div>Results</div>
+    </div>
+    <div class="card">
+      <h2>Manage</h2>
+      <a class="btn" href="/admin/students">View Students</a>
+      <a class="btn" href="/admin/students/new">Add Student</a>
+    </div>
+  </div>
+</body>
+</html>
