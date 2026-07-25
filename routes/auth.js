@@ -2,37 +2,38 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-// GET login page
-router.get('/login', (req, res) => {
-  res.render('login', { error: null });
-});
-
-// POST login
-router.post('/login', async (req, res) => {
+async function handleLogin(req, res, role, viewPath, redirectTo) {
   try {
     const { regNumber, password } = req.body;
-    const user = await User.findOne({ regNumber });
+    const user = await User.findOne({ regNumber, role });
 
-    if (!user) return res.render('login', { error: 'Invalid registration number or password' });
+    if (!user) return res.render(viewPath, { error: 'Invalid registration number or password' });
 
     const match = await user.comparePassword(password);
-    if (!match) return res.render('login', { error: 'Invalid registration number or password' });
+    if (!match) return res.render(viewPath, { error: 'Invalid registration number or password' });
 
     req.session.userId = user._id;
     req.session.role = user.role;
     req.session.name = user.name;
 
-    if (user.role === 'admin') return res.redirect('/admin/dashboard');
-    return res.redirect('/student/dashboard');
+    return res.redirect(redirectTo);
   } catch (err) {
     console.error(err);
-    res.render('login', { error: 'Something went wrong. Try again.' });
+    res.render(viewPath, { error: 'Something went wrong. Try again.' });
   }
-});
+}
+
+// Admin login
+router.get('/admin/login', (req, res) => res.render('admin/login', { error: null }));
+router.post('/admin/login', (req, res) => handleLogin(req, res, 'admin', 'admin/login', '/admin/dashboard'));
+
+// Student login
+router.get('/student/login', (req, res) => res.render('login', { error: null }));
+router.post('/student/login', (req, res) => handleLogin(req, res, 'student', 'login', '/student/dashboard'));
 
 // Logout
 router.get('/logout', (req, res) => {
-  req.session.destroy(() => res.redirect('/login'));
+  req.session.destroy(() => res.redirect('/'));
 });
 
 module.exports = router;
