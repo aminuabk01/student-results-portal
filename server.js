@@ -33,7 +33,7 @@ app.use(session({
 }));
 
 // Routes
-app.get('/', (req, res) => res.redirect('/login'));
+app.get('/', (req, res) => res.render('index'));
 app.use('/', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/student', studentRoutes);
